@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Document, Page } from "react-pdf/dist/esm/entry.webpack";
+import styled from "styled-components";
 
 const PDFViewer = ({ file }) => {
   const [numPages, setNumpages] = useState(null);
@@ -15,7 +16,7 @@ const PDFViewer = ({ file }) => {
   };
 
   return (
-    <div>
+    <Container>
       {file && (
         <Document
           file={file?.url}
@@ -25,8 +26,16 @@ const PDFViewer = ({ file }) => {
           <Page height={600} pageNumber={pageNum} />
         </Document>
       )}
-    </div>
+    </Container>
   );
 };
+
+const Container = styled.div`
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+
+  padding-top: 1.5rem;
+`;
 
 export default PDFViewer;

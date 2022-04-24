@@ -24,20 +24,22 @@ export const convertToFile = (file) => {
 
   let url = URL.createObjectURL(file);
   const size = returnFileSize(file.size);
-  const name = file.name;
+  let name = file.name;
   const fileType = file.type.split("/")[0];
   const fileExt = file.type.split("/")[1];
+  const dateModified = file.lastModified;
 
   return new Promise((resolve, reject) => {
     if (fileType === "image") {
       fileToImageURL(file).then((image) => {
         const uri = generatePdfFromImage(fileExt, image);
-
+        let str = name.replace(fileExt, "pdf");
+        name = str;
         URL.revokeObjectURL(url);
-        resolve(new File(name, size, uri, fileType, fileExt));
+        resolve(new File(name, size, uri, fileType, fileExt, dateModified));
       });
     } else {
-      resolve(new File(name, size, url, fileType, fileExt));
+      resolve(new File(name, size, url, fileType, fileExt, dateModified));
     }
   });
 };

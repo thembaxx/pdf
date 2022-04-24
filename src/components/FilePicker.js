@@ -1,7 +1,7 @@
 import React from "react";
 import { convertToFile } from "../helpers";
 
-const FilePicker = ({ returnDocuments }) => {
+const FilePicker = ({ returnDocuments, children }) => {
   const handleUploads = (e) => {
     const files = e.currentTarget.files;
 
@@ -17,13 +17,17 @@ const FilePicker = ({ returnDocuments }) => {
 
   return (
     <div>
-      <label for="file_uploads">Upload documents</label>
+      <label as="label" for="file_uploads">
+        {children}
+      </label>
+
       <input
         type="file"
         id="file_uploads"
         name="file_uploads"
         multiple
         onChange={handleUploads}
+        style={{ display: "none" }}
       ></input>
     </div>
   );
