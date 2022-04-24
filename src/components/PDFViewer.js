@@ -13,6 +13,7 @@ const PDFViewer = ({ file }) => {
 
   const onDocumentLoadError = (e) => {
     console.log("error loading document: ", e);
+    console.log(numPages);
   };
 
   return (
